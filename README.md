@@ -1,4 +1,4 @@
-# CytronStemhatScratch
+# Cytron Stemhat Scratch3
 
 **Scratch 3 with Cytron Stemhat Addon**
 
