@@ -10,7 +10,7 @@ fi
 # Detect architecture
 ARCH=$(dpkg --print-architecture)
 
-# Map architecture to .deb file
+# Map architecture to the appropriate .deb file based on the detected architecture
 case $ARCH in
     armhf)
         FILE="Scratch3-Pi4-32.deb"
@@ -29,18 +29,37 @@ case $ARCH in
         exit 1
         ;;
 esac
-# Download the appropriate .deb file from GitHub
-REPO_URL="https://raw.githubusercontent.com/Teakzieas/CytronStemhatScratch/main/Dist"
-wget -q "${REPO_URL}/${FILE}" -O "/tmp/${FILE}"
 
-# Install the .deb file
-if [ -f "/tmp/${FILE}" ]; then
-    apt install -y "/tmp/${FILE}"
-    rm "/tmp/${FILE}" # Clean up after installation
-else
-    echo "Failed to download the .deb file."
+# Base URL for downloading .deb files
+REPO_URL="https://github.com/Teakzieas/CytronStemhatScratch/releases/download/V1,0"
+
+# Download the appropriate .deb file and show a progress bar
+echo "Downloading ${FILE}..."
+wget --show-progress -q "${REPO_URL}/${FILE}" -O "/tmp/${FILE}"
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to download ${FILE}."
     exit 1
 fi
 
-# Run your desired command
-pigpiod
+# Install the downloaded .deb file silently
+echo "Installing ${FILE}..."
+DEBIAN_FRONTEND=noninteractive apt install -y "/tmp/${FILE}" &>/dev/null
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to install ${FILE}."
+    rm -f "/tmp/${FILE}" # Clean up
+    exit 1
+fi
+
+# Clean up the downloaded file
+rm -f "/tmp/${FILE}"
+echo "${FILE} installation completed successfully."
+
+# Run the pigpio daemon
+echo "Starting pigpio daemon..."
+if command -v pigpiod &>/dev/null; then
+    pigpiod
+    echo "pigpiod started successfully."
+else
+    echo "Error: pigpiod command not found. Ensure pigpio is installed."
+    exit 1
+fi
