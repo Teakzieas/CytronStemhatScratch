@@ -33,6 +33,17 @@ esac
 # Base URL for downloading .deb files
 REPO_URL="https://github.com/Teakzieas/CytronStemhatScratch/releases/download/V1,0"
 
+# Check if Scratch3 is already installed
+if dpkg -l | grep -q "scratch3"; then
+    echo "An existing version of Scratch3 is detected. Removing it..."
+    apt remove -y scratch3 &>/dev/null
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to remove the existing version of Scratch3."
+        exit 1
+    fi
+    echo "Existing version of Scratch3 removed successfully."
+fi
+
 # Download the appropriate .deb file and show a progress bar
 echo "Downloading ${FILE}..."
 wget --show-progress -q "${REPO_URL}/${FILE}" -O "/tmp/${FILE}"
