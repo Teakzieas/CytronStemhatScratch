@@ -1,5 +1,5 @@
 #!/bin/bash
-clear
+
 # Ensure the script is run as root
 if [ "$EUID" -ne 0 ]; then
     echo "This script must be run as root. Re-running with sudo..."
@@ -64,6 +64,16 @@ fi
 # Clean up the downloaded file
 rm -f "/tmp/${FILE}"
 echo "${FILE} installation completed successfully."
+
+# Enable I2C on Raspberry Pi
+echo "Enabling I2C..."
+raspi-config nonint do_i2c 0
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to enable I2C. Please check your configuration."
+    exit 1
+fi
+
+echo "I2C enabled successfully."
 
 # Run the pigpio daemon
 echo "Starting pigpio daemon..."
