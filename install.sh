@@ -29,7 +29,6 @@ case $ARCH in
         exit 1
         ;;
 esac
-https://github.com/Teakzieas/CytronStemhatScratch/blob/main/Dist/Scratch3-Pi4-64.deb
 # Download the appropriate .deb file from GitHub
 REPO_URL="https://raw.githubusercontent.com/Teakzieas/CytronStemhatScratch/main/Dist"
 wget -q "${REPO_URL}/${FILE}" -O "/tmp/${FILE}"
