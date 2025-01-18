@@ -75,12 +75,3 @@ fi
 
 echo "I2C enabled successfully."
 
-# Run the pigpio daemon
-echo "Starting pigpio daemon..."
-if command -v pigpiod &>/dev/null; then
-    pigpiod
-    echo "pigpiod started successfully."
-else
-    echo "Error: pigpiod command not found. Ensure pigpio is installed."
-    exit 1
-fi
