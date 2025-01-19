@@ -2,6 +2,8 @@
 
 **Scratch 3 with Cytron Stemhat Addon**
 
+For detailed instructions of installation, please visit the [Installation Guide](https://github.com/Teakzieas/CytronStemhatScratch/blob/main/Docs/InstallationGuide.pdf)
+
 This repository provides an easy way to install Scratch 3 with the Cytron Stemhat Addon. Follow the instructions below to get started quickly.
 
 ---
