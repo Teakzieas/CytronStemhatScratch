@@ -26,9 +26,9 @@ This script supports Scratch 3 with Cytron Stemhat Addon for:
 
 ---
 
-## **Documentation**
+## **Block Documentation**
 
-For detailed instructions and additional information, please visit the [documentation](https://github.com/Teakzieas/CytronStemhatScratch/blob/main/Docs/Documentation.pdf).
+For detailed documentation and additional information, please visit the [documentation](https://github.com/Teakzieas/CytronStemhatScratch/blob/main/Docs/Documentation.pdf) for the blocks.
 
 ---
 
